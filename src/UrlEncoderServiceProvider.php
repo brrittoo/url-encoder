@@ -33,6 +33,23 @@
 		 */
 		public function boot()
 		{
+			
+			$key = config('url-encoder.url_encryption_secret_key');
+			
+			if (empty($key)) {
+				if (app()->environment('local', 'testing')) {
+					$key = bin2hex(random_bytes(16));
+					config(['url-encoder.url_encryption_secret_key' => $key]);
+					$this->app['log']->info('Generated temporary URL encryption key: '.$key);
+				} else {
+					throw new RuntimeException(
+						'URL_ENCRYPTION_SECRET_KEY is not configured. '.
+						'Please add to your .env file: '.
+						'URL_ENCRYPTION_SECRET_KEY='.bin2hex(random_bytes(16))
+					);
+				}
+			}
+			
 			// Register middleware
 			$router = $this->app['router'];
 			$middlewareAlias = config('url-encoder.middleware_alias', 'url-encode');

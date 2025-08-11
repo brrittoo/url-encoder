@@ -50,6 +50,12 @@ return [
 
 ## Usage
 
+Config-cache Command:
+
+```bash
+php artisan config:cache
+```
+
 ### Basic Usage
 
 ```php
