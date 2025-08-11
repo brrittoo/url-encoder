@@ -1,6 +1,6 @@
 <?php
 
-	namespace Utilities;
+    namespace ParamGuard\UrlEncoder\Utilities;
     use Illuminate\Support\Str as CoreStr;
 	class Str extends CoreStr
 	{
@@ -8,4 +8,9 @@
         {
             return is_null($value);
         }
+		
+		public static function isString($val)
+		{
+			return is_string($val);
+		}
 	}

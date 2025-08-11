@@ -1,7 +1,9 @@
 <?php
 
-	namespace Utilities;
+    namespace ParamGuard\UrlEncoder\Utilities;
 
+	use PHPUnit\Util\Exception;
+	
 	class Url
 	{
         public static function parse($url, $component = -1): array
@@ -29,7 +31,7 @@
             if(self::isValid($url)){
                 $separator = '://';
                 $explode = explode($separator,$url);
-                if (Arr::isOfType($explode)){
+                if (Arr::accessible($explode)){
                     $url = $explode[0].$separator.preg_replace('/(\/+)/','/',$explode[1]);
                 }
             }
@@ -50,7 +52,7 @@
 
             try{
 
-                if(!empty($parameters) && Arr::isArr($parameters)){
+                if(!empty($parameters) && Arr::accessible($parameters)){
                     foreach ($parameters as $key => $parameter){
                         $parameters[$key] = EncodeClipper::customEncryptionDecryption(
                             $parameter,
@@ -70,7 +72,8 @@
                 }
 
             }catch (\Throwable $e){
-                throw new ($e);
+				
+                throw new Exception($e);
             }
 
             return $parameters;
@@ -97,7 +100,7 @@
             ];
             if ($decode) {
 
-                $value = HtmlEntities::html_entity_decode($value, ENT_QUOTES | ENT_HTML5);
+                $value = html_entity_decode($value, ENT_QUOTES | ENT_HTML5);
                 $value = self::rawurldecode($value);
                 foreach (Arr::arrFlip($replacements) as $search => $replace) {
                     $value = Str::replace($search, $replace, $value);

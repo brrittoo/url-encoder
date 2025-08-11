@@ -1,16 +1,24 @@
 <?php
 
-	namespace Utilities;
+	namespace ParamGuard\UrlEncoder\Utilities;
     use Illuminate\Support\Arr as CoreArr;
 	class Arr extends CoreArr
 	{
-        public static function isArr(mixed $value): bool
-        {
-            return is_array($value);
-        }
-
-        public static function isOfType($array):bool
-        {
-            return is_array($array);
-        }
+		
+		/**
+		 * Check if a value exists in an array (strict comparison by default).
+		 *
+		 * @param mixed $needle
+		 * @param array $haystack
+		 * @param bool  $strict
+		 * @return bool
+		 */
+		public static function inArray($needle, array $haystack, bool $strict = false): bool
+		{
+			return in_array($needle, $haystack, $strict);
+		}
+		
+		public static function arrFlip(array $arr){
+			return array_flip($arr);
+		}
 	}

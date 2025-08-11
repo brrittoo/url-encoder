@@ -1,31 +1,51 @@
 <?php
 
-    use App\Services\Override\Url\UrlGenerator;
-    use Illuminate\Support\ServiceProvider;
+    namespace ParamGuard\UrlEncoder;
 
+    use Illuminate\Support\ServiceProvider;
+    use ParamGuard\UrlEncoder\Override\Url\UrlGenerator;
+    use ParamGuard\UrlEncoder\Middleware\UrlManipulationMiddleware;
+    use ParamGuard\UrlEncoder\Utilities\Arr;
+    
     class UrlEncoderServiceProvider extends ServiceProvider
-	{
-        /*
-         *
-         *  Override the UrlGenerator Class
-         */
+    {
         public function register()
         {
-
-            app()->extend('url', function () {
-
+            $this->app->extend('url', function ($original) {
                 return new UrlGenerator(
-                    app('router')->getRoutes(),
-                    request(),
-                    app('config')->get('app.asset_url')
+                    $this->app['router']->getRoutes(),
+                    $this->app['request'],
+                    $this->app['config']->get('app.asset_url')
                 );
-
             });
-
         }
 
-        public function boot()
+
+	        
+	        
+		public function boot()
         {
-
+	        $router = $this->app['router'];
+	        $middlewareAlias = config('url-encoder.middleware_alias', 'url-encode');
+	        $enabledGroups = config('url-encoder.enable_route_groups', []);
+	        $router->aliasMiddleware($middlewareAlias, UrlManipulationMiddleware::class);
+	        $refObject = new \ReflectionObject($router);
+	        $refProperty = $refObject->getProperty('middlewareGroups');
+	        $refProperty->setAccessible(true);
+	        $middlewareGroups = $refProperty->getValue($router);
+	        foreach ($enabledGroups as $groupName) {
+		        if (isset($middlewareGroups[$groupName])) {
+			        if (!Arr::inArray($middlewareAlias, $middlewareGroups[$groupName])) {
+				        $middlewareGroups[$groupName][] = $middlewareAlias;
+			        }
+		        }
+	        }
+			
+	        $refProperty->setValue($router, $middlewareGroups);
+	        
+	        $this->publishes([
+		        __DIR__.'/../config/url-encoder.php' => config_path('url-encoder.php'),
+	        ], 'url-encoder-config');
         }
-	}
+        
+    }

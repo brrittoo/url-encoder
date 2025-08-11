@@ -1,6 +1,6 @@
 <?php
 
-	namespace Utilities;
+    namespace ParamGuard\UrlEncoder\Utilities;
 
 	class EncodeClipper
 	{

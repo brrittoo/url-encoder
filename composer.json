@@ -31,7 +31,10 @@
         "laravel": {
             "providers": [
                 "ParamGuard\\UrlEncoder\\UrlEncoderServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "UrlEncoder": "ParamGuard\\UrlEncoder\\Facades\\UrlEncoder"
+            }
         }
     },
     "require-dev": {
