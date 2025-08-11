@@ -54,8 +54,5 @@
 		| Key used for encrypting/decrypting URL parameters
 		|
 		*/
-		'url_encryption_secret_key' => env('URL_ENCRYPTION_SECRET_KEY', function() {
-			// Generate a random 32-character string if no key is set
-			return bin2hex(random_bytes(16));
-		}),
+		'url_encryption_secret_key' => env('URL_ENCRYPTION_SECRET_KEY'),
 	];
