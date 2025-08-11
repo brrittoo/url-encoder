@@ -1,17 +1,58 @@
 <?php
-
+	
 	return [
-		'middleware_alias' =>  'url-encode',
+		/*
+		|--------------------------------------------------------------------------
+		| Middleware Alias
+		|--------------------------------------------------------------------------
+		|
+		| The alias to use for the URL encoding middleware
+		|
+		*/
+		'middleware_alias' => 'url-encode',
+		
+		/*
+		|--------------------------------------------------------------------------
+		| Enabled Route Groups
+		|--------------------------------------------------------------------------
+		|
+		| Route groups that should automatically have URL encoding middleware applied
+		|
+		*/
 		'enable_route_groups' => [
 			'web'
 		],
+		
+		/*
+		|--------------------------------------------------------------------------
+		| Excluded Routes
+		|--------------------------------------------------------------------------
+		|
+		| Route names that should skip URL encoding
+		|
+		*/
 		'exclude_routes' => [
 			'login',
-			'register',
+			'register'
 		],
+		
+		/*
+		|--------------------------------------------------------------------------
+		| Enable Encoding
+		|--------------------------------------------------------------------------
+		|
+		| Master switch for URL encoding functionality
+		|
+		*/
 		'is_encoding_enable' => env('URL_ENCODE_ENABLE', false),
-		'encryption_method' => env('ENCRYPTION_METHOD', 'AES-256-CBC'),
-		'encryption_secret_key' => env('ENCRYPTION_SECRET_KEY'),
-		'encryption_fixed_iv' => env('ENCRYPTION_FIXED_IV'),
-		'encryption_salt' => env('ENCRYPTION_FIXED_SALT'),
+		
+		/*
+		|--------------------------------------------------------------------------
+		| Encryption Secret Key
+		|--------------------------------------------------------------------------
+		|
+		| Key used for encrypting/decrypting URL parameters
+		|
+		*/
+		'encryption_secret_key' => env('URL_ENCRYPTION_SECRET_KEY'),
 	];

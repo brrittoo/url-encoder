@@ -18,7 +18,4 @@
 			return in_array($needle, $haystack, $strict);
 		}
 		
-		public static function arrFlip(array $arr){
-			return array_flip($arr);
-		}
 	}

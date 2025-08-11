@@ -15,7 +15,7 @@
 		}
 	}
 	
-	if (!function_exists('encrypted_route')) {
+	if (!function_exists('encryptedRoute')) {
 		/**
 		 * Generate a route URL with encrypted parameters.
 		 * Supports string, numeric, or array of parameters.
@@ -31,7 +31,7 @@
 		 */
 		function encryptedRoute(string $name, $parameters = [], bool $absolute = true): string
 		{
-			if (enableUrlEncode()) {
+			if (!enableUrlEncode()) {
 				return route($name, $parameters, $absolute);
 			}
 			
@@ -53,7 +53,7 @@
 	}
 	
 	
-	if (!function_exists('encrypted_route_js')) {
+	if (!function_exists('encryptedRouteJS')) {
 		/**
 		 * Generate a route URL string for JavaScript usage,
 		 * returning the URL with encrypted placeholders for parameters.
