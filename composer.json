@@ -1,0 +1,41 @@
+{
+    "name": "paramguard/url-encoder",
+    "description": "Laravel package for URL parameter encoding",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ataul-galib",
+            "email": "ataul.gonigalib@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ParamGuard\\UrlEncoder\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ParamGuard\\UrlEncoder\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ParamGuard\\UrlEncoder\\UrlEncoderServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
+        "phpunit/phpunit": "^9.0"
+    }
+}

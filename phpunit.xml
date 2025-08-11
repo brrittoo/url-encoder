@@ -1,0 +1,24 @@
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Package Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="URL_ENCODE_ENABLE" value="true"/>
+        <env name="ENCRYPTION_SECRET_KEY" value="test-secret-key"/>
+        <env name="ENCRYPTION_FIXED_IV" value="test-iv"/>
+        <env name="ENCRYPTION_FIXED_SALT" value="test-salt"/>
+    </php>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
