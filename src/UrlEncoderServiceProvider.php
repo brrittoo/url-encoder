@@ -43,7 +43,7 @@
 			
 			if (empty($key)) {
 				$key = bin2hex(random_bytes(16));
-				if ($this->app->environment(['local', 'testing', ''])) {
+				if ($this->app->environment(['local', 'testing', 'development'])) {
 					
 					config(['url-encoder.url_encryption_secret_key' => $key]);
 					$this->app['log']->warning('Auto-generated temporary URL encryption key: '.$key);
