@@ -44,7 +44,7 @@ return [
     'enable_route_groups' => ['web'],
     'exclude_routes' => ['login', 'register'],
     'is_encoding_enable' => env('URL_ENCODE_ENABLE', false),
-    'encryption_secret_key' => env('URL_ENCRYPTION_SECRET_KEY'),
+    'url_encryption_secret_key' => env('URL_ENCRYPTION_SECRET_KEY'),
 ];
 ```
 

@@ -3,7 +3,7 @@
 	
 	class EncodeClipper {
 		public static function customEncryptionDecryption($value, $action, $isURL = false) {
-			$secret_key = config('url-encoder.encryption_secret_key');
+			$secret_key = config('url-encoder.url_encryption_secret_key');
 			if ($action == ENCRYPTED_PARAM) {
 				$value = is_array($value) ? implode('|', $value) : $value;
 				$encrypted = self::encrypt_ctr($value, $secret_key);
