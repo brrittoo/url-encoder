@@ -2,21 +2,21 @@
 	
 	namespace ParamGuard\UrlEncoder;
 	
-	use Illuminate\Support\Facades\Blade;
 	use Illuminate\Support\ServiceProvider;
 	use ParamGuard\UrlEncoder\Override\Url\UrlGenerator;
 	use ParamGuard\UrlEncoder\Middleware\UrlManipulationMiddleware;
-	use ParamGuard\UrlEncoder\Utilities\EncodeClipper;
+	use RuntimeException;
+	use Illuminate\Routing\Router;
 	
 	class UrlEncoderServiceProvider extends ServiceProvider
 	{
-		/**
-		 * Register any application services.
-		 *
-		 * @return void
-		 */
 		public function register()
 		{
+			$this->mergeConfigFrom(
+				__DIR__.'/../config/url-encoder.php',
+				'url-encoder'
+			);
+			
 			$this->app->extend('url', function ($original) {
 				return new UrlGenerator(
 					$this->app['router']->getRoutes(),
@@ -26,74 +26,72 @@
 			});
 		}
 		
-		/**
-		 * Bootstrap any application services.
-		 *
-		 * @return void
-		 */
 		public function boot()
 		{
+			$this->validateEncryptionKey();
+			$this->registerMiddleware();
+			$this->publishConfig();
+		}
+		
+		protected function validateEncryptionKey()
+		{
+			if ($this->app->configurationIsCached()) {
+				return;
+			}
 			
 			$key = config('url-encoder.url_encryption_secret_key');
 			
 			if (empty($key)) {
-				if (app()->environment('local', 'testing')) {
-					$key = bin2hex(random_bytes(16));
+				$key = bin2hex(random_bytes(16));
+				if ($this->app->environment(['local', 'testing', ''])) {
+					
 					config(['url-encoder.url_encryption_secret_key' => $key]);
-					$this->app['log']->info('Generated temporary URL encryption key: '.$key);
+					$this->app['log']->warning('Auto-generated temporary URL encryption key: '.$key);
 				} else {
 					throw new RuntimeException(
-						'URL_ENCRYPTION_SECRET_KEY is not configured. '.
-						'Please add to your .env file: '.
-						'URL_ENCRYPTION_SECRET_KEY='.bin2hex(random_bytes(16))
+						"URL_ENCRYPTION_SECRET_KEY is not set. \n".
+						"We tried to generate one but couldn't write to .env file. \n".
+						"Please add this to your .env manually:\n".
+						"URL_ENCRYPTION_SECRET_KEY=\"{$key}\""
 					);
 				}
 			}
 			
-			// Register middleware
-			$router = $this->app['router'];
+			if (strlen($key) < 32) {
+				throw new RuntimeException(
+					'URL_ENCRYPTION_SECRET_KEY must be at least 32 characters. '.
+					'Current length: '.strlen($key)
+				);
+			}
+		}
+		
+		protected function registerMiddleware()
+		{
+			$router = $this->app->make(Router::class);
 			$middlewareAlias = config('url-encoder.middleware_alias', 'url-encode');
 			$enabledGroups = config('url-encoder.enable_route_groups', []);
 			
 			$router->aliasMiddleware($middlewareAlias, UrlManipulationMiddleware::class);
 			
-			$refObject = new \ReflectionObject($router);
-			$refProperty = $refObject->getProperty('middlewareGroups');
-			$refProperty->setAccessible(true);
-			$middlewareGroups = $refProperty->getValue($router);
+			$reflection = new \ReflectionObject($router);
+			$property = $reflection->getProperty('middlewareGroups');
+			$property->setAccessible(true);
+			$middlewareGroups = $property->getValue($router);
 			
 			foreach ($enabledGroups as $groupName) {
-				if (isset($middlewareGroups[$groupName])) {
-					if (!in_array($middlewareAlias, $middlewareGroups[$groupName])) {
-						$middlewareGroups[$groupName][] = $middlewareAlias;
-					}
+				if (isset($middlewareGroups[$groupName]) &&
+					!in_array($middlewareAlias, $middlewareGroups[$groupName])) {
+					$middlewareGroups[$groupName][] = $middlewareAlias;
 				}
 			}
 			
-			$refProperty->setValue($router, $middlewareGroups);
-			
-			// Publish configuration
+			$property->setValue($router, $middlewareGroups);
+		}
+		
+		protected function publishConfig()
+		{
 			$this->publishes([
 				__DIR__.'/../config/url-encoder.php' => config_path('url-encoder.php'),
 			], 'url-encoder-config');
-			
-			// Register Blade directives
-			$this->registerBladeDirectives();
-		}
-		
-		/**
-		 * Register the Blade directives.
-		 *
-		 * @return void
-		 */
-		protected function registerBladeDirectives()
-		{
-			Blade::directive('encrypt', function ($expression) {
-				return "<?php echo \\ParamGuard\\UrlEncoder\\Utilities\\EncodeClipper::customEncryptionDecryption($expression, 'encrypt', true); ?>";
-			});
-			
-			Blade::directive('decrypt', function ($expression) {
-				return "<?php echo \\ParamGuard\\UrlEncoder\\Utilities\\EncodeClipper::customEncryptionDecryption($expression, 'decrypt', true); ?>";
-			});
 		}
 	}
