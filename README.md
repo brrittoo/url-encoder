@@ -132,13 +132,13 @@ $urlData = encryptedRoute('project.task.show', ['project_id', 'task_id']);
 **JavaScript Side:**
 ```html
 <script>
-let action_url = @json($urlData['url'])
-    .replace(@json($urlData['placeholders']['project_id']), projectId)
-    .replace(@json($urlData['placeholders']['task_id']), taskId);
+   let action_url = @json($urlData['url'])
+           .replace(@json($urlData['placeholders']['project_id']), projectId)
+           .replace(@json($urlData['placeholders']['task_id']), taskId);
 
-fetch(action_url)
-    .then(response => response.json())
-    .then(data => console.log(data));
+   fetch(action_url)
+           .then(response => response.json())
+           .then(data => console.log(data));
 </script>
 ```
 
@@ -180,13 +180,13 @@ To use the local version, update your `composer.json` with the following reposit
 
 ```json
 "repositories": [
-    {
-        "type": "path",
-        "url": "../laravel-url-encoder",
-        "options": {
-            "symlink": true
-        }
-    }
+{
+"type": "path",
+"url": "../laravel-url-encoder",
+"options": {
+"symlink": true
+}
+}
 ]
 ```
 
