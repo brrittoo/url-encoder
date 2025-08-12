@@ -211,7 +211,7 @@ Clone the package repo outside your Laravel project folder:
 
 ```bash
 git clone https://github.com/ataulgalib/laravel-url-encoder.git ../laravel-url-encoder
-
+```
 
 
 Add this repository to your Laravel project’s composer.json:
