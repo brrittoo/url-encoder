@@ -204,6 +204,7 @@ Also, the **Local Development (From Git Clone)** section needs proper markdown f
 
 ```markdown
 ## 🛠 Local Development (From Git Clone)
+```
 
 If you prefer to clone the package repo directly and develop locally with a symlink:
 
@@ -218,13 +219,13 @@ Add this repository to your Laravel project’s composer.json:
 
 ```json
 "repositories": [
-    {
-        "type": "path",
-        "url": "../laravel-url-encoder",
-        "options": {
-            "symlink": true
-        }
-    }
+{
+"type": "path",
+"url": "../laravel-url-encoder",
+"options": {
+"symlink": true
+}
+}
 ]
 ```
 
