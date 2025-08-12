@@ -180,23 +180,69 @@ To use the local version, update your `composer.json` with the following reposit
 
 ```json
 "repositories": [
-{
-"type": "path",
-"url": "../laravel-url-encoder",
-"options": {
-"symlink": true
-}
-}
-]
+    {
+        "type": "path",
+        "url": "packages/paramguard/url-encoder"
+    }
+]]
 ```
 
 Then run:
 
 ```bash
-composer require paramguard/url-encoder:@dev
+composer update paramguard/url-encoder
 ```
 
 This will symlink your local package so changes take effect immediately without needing to reinstall.
+
+---
+
+
+---
+
+Also, the **Local Development (From Git Clone)** section needs proper markdown formatting and code blocks:
+
+```markdown
+## 🛠 Local Development (From Git Clone)
+
+If you prefer to clone the package repo directly and develop locally with a symlink:
+
+Clone the package repo outside your Laravel project folder:
+
+```bash
+git clone https://github.com/ataulgalib/laravel-url-encoder.git ../laravel-url-encoder
+
+
+
+Add this repository to your Laravel project’s composer.json:
+
+```json
+"repositories": [
+    {
+        "type": "path",
+        "url": "../laravel-url-encoder",
+        "options": {
+            "symlink": true
+        }
+    }
+]
+```
+
+
+Require the package locally using the dev version:
+
+```bash
+composer require paramguard/url-encoder:@dev
+```
+
+
+Publish the package config:
+
+```bash
+php artisan vendor:publish --provider="ParamGuard\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
+```
+
+This symlinks the package source from your cloned repo into your Laravel project, so any changes in the clone take effect immediately.
 
 ---
 
