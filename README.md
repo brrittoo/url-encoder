@@ -11,7 +11,6 @@ Secure URL parameter encryption for Laravel applications. Protect sensitive data
 - 🌐 URL-safe base64 encoding
 - 🚦 Configurable route groups and exclusions
 - 💻 JavaScript compatibility
-- ✨ Blade directive support
 - 🛠 Optional full source publish for local development
 
 ---
