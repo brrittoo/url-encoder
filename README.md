@@ -179,7 +179,7 @@ Then run:
 composer update paramguard/url-encoder
 ```
 
-This will symlink your local package so changes take effect immediately without needing to reinstall.
+This will local package so changes take effect immediately without needing to reinstall.
 
 ---
 
