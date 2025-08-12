@@ -31,7 +31,8 @@
 		    $isInEnabledGroup = !empty(array_intersect($enabledGroups, (array)$routeMiddleware));
 			
 		    $excludedRoutes = config('url-encoder.exclude_routes', []);
-		    if (enableUrlEncode() && $isInEnabledGroup && !Arr::inArray($name, $excludedRoutes)) {
+		    if (enableUrlEncode() && !empty($parameters) && $isInEnabledGroup && !Arr::inArray($name,
+				    $excludedRoutes)) {
 			    $parameters = Url::getRouteParamEncryptionDecryption($parameters, ENCRYPTED_PARAM);
 		    }
 		    

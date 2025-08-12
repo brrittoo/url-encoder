@@ -108,19 +108,6 @@ Route::get('/project/{project_id}/task/{task_id}', function ($project_id, $task_
 })->name('project.task.show');
 ```
 
----
-
-### Blade Directives
-
-```html
-<!-- Encrypt -->
-<a href="/project/@encrypt($project->id)">Secure Link</a>
-
-<!-- Decrypt -->
-<input type="hidden" name="token" value="@decrypt($encryptedToken)">
-```
-
----
 
 ### JavaScript Integration
 
