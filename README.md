@@ -219,13 +219,14 @@ Add this repository to your Laravel project’s composer.json:
 
 ```json
       "repositories": [
-      {
-         "type": "path",
-         "url": "../laravel-url-encoder",
-         "options": {
-         "symlink": true
-      }
-  ]
+         {
+            "type": "path",
+            "url": "../laravel-url-encoder",
+            "options": {
+                "symlink": true
+            }
+         }
+    ]
 ```
 
 
