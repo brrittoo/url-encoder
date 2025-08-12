@@ -184,7 +184,7 @@ To use the local version, update your `composer.json` with the following reposit
         "type": "path",
         "url": "packages/paramguard/url-encoder"
     }
-]]
+]
 ```
 
 Then run:
@@ -218,14 +218,14 @@ git clone https://github.com/ataulgalib/laravel-url-encoder.git ../laravel-url-e
 Add this repository to your Laravel project’s composer.json:
 
 ```json
-"repositories": [
-{
-"type": "path",
-"url": "../laravel-url-encoder",
-"options": {
-"symlink": true
-}
-}
+      "repositories": [
+      {
+         "type": "path",
+         "url": "../laravel-url-encoder",
+         "options": {
+         "symlink": true
+      }
+  }
 ]
 ```
 
