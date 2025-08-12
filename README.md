@@ -225,8 +225,7 @@ Add this repository to your Laravel project’s composer.json:
          "options": {
          "symlink": true
       }
-  }
-]
+  ]
 ```
 
 
