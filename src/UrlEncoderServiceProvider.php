@@ -5,6 +5,8 @@
 	use Illuminate\Support\ServiceProvider;
 	use ParamGuard\UrlEncoder\Override\Url\UrlGenerator;
 	use ParamGuard\UrlEncoder\Middleware\UrlManipulationMiddleware;
+	use ParamGuard\UrlEncoder\Utilities\Arr;
+	use ParamGuard\UrlEncoder\Utilities\Str;
 	use RuntimeException;
 	use Illuminate\Routing\Router;
 	
@@ -31,6 +33,7 @@
 			$this->validateEncryptionKey();
 			$this->registerMiddleware();
 			$this->publishConfig();
+			$this->publishFullPakages();
 		}
 		
 		protected function validateEncryptionKey()
@@ -42,9 +45,8 @@
 			$key = config('url-encoder.url_encryption_secret_key');
 			
 			if (empty($key)) {
-				$key = bin2hex(random_bytes(16));
+				$key = Str::bin2hex(Str::randomBytes(16));
 				if ($this->app->environment(['local', 'testing', 'development'])) {
-					
 					config(['url-encoder.url_encryption_secret_key' => $key]);
 					$this->app['log']->warning('Auto-generated temporary URL encryption key: '.$key);
 				} else {
@@ -57,10 +59,10 @@
 				}
 			}
 			
-			if (strlen($key) < 32) {
+			if (Str::strlen($key) < 32) {
 				throw new RuntimeException(
 					'URL_ENCRYPTION_SECRET_KEY must be at least 32 characters. '.
-					'Current length: '.strlen($key)
+					'Current length: '.Str::strlen($key)
 				);
 			}
 		}
@@ -80,7 +82,7 @@
 			
 			foreach ($enabledGroups as $groupName) {
 				if (isset($middlewareGroups[$groupName]) &&
-					!in_array($middlewareAlias, $middlewareGroups[$groupName])) {
+					!Arr::inArray($middlewareAlias, $middlewareGroups[$groupName])) {
 					$middlewareGroups[$groupName][] = $middlewareAlias;
 				}
 			}
@@ -93,5 +95,13 @@
 			$this->publishes([
 				__DIR__.'/../config/url-encoder.php' => config_path('url-encoder.php'),
 			], 'url-encoder-config');
+		}
+		
+		protected function publishFullPakages()
+		{
+			// Publish full package source for customization
+			$this->publishes([
+				__DIR__ . '/../' => base_path('packages/paramguard/url-encoder'),
+			], 'url-encoder-source');
 		}
 	}

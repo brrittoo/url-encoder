@@ -12,6 +12,9 @@ Secure URL parameter encryption for Laravel applications. Protect sensitive data
 - 🚦 Configurable route groups and exclusions
 - 💻 JavaScript compatibility
 - ✨ Blade directive support
+- 🛠 Optional full source publish for local development
+
+---
 
 ## Installation
 
@@ -27,6 +30,8 @@ Publish the config file:
 php artisan vendor:publish --provider="ParamGuard\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
 ```
 
+---
+
 ## Configuration
 
 Set these in your `.env`:
@@ -39,14 +44,53 @@ URL_ENCRYPTION_SECRET_KEY=your-32-character-secret-key-here
 Edit `config/url-encoder.php` to customize:
 
 ```php
+<?php
+
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware Alias
+    |--------------------------------------------------------------------------
+    */
     'middleware_alias' => 'url-encode',
-    'enable_route_groups' => ['web'],
-    'exclude_routes' => ['login', 'register'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enabled Route Groups
+    |--------------------------------------------------------------------------
+    */
+    'enable_route_groups' => [
+        'web'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Excluded Routes
+    |--------------------------------------------------------------------------
+    */
+    'exclude_routes' => [
+        'login',
+        'register'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Encoding
+    |--------------------------------------------------------------------------
+    */
     'is_encoding_enable' => env('URL_ENCODE_ENABLE', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Encryption Secret Key
+    |--------------------------------------------------------------------------
+    */
     'url_encryption_secret_key' => env('URL_ENCRYPTION_SECRET_KEY'),
 ];
 ```
+
+---
 
 ## Usage
 
@@ -64,6 +108,8 @@ Route::get('/project/{project_id}/task/{task_id}', function ($project_id, $task_
 })->name('project.task.show');
 ```
 
+---
+
 ### Blade Directives
 
 ```html
@@ -74,39 +120,107 @@ Route::get('/project/{project_id}/task/{task_id}', function ($project_id, $task_
 <input type="hidden" name="token" value="@decrypt($encryptedToken)">
 ```
 
+---
+
 ### JavaScript Integration
 
 **PHP Side (Controller/Blade):**
-
 ```php
 $urlData = encryptedRoute('project.task.show', ['project_id', 'task_id']);
 ```
 
 **JavaScript Side:**
-
 ```html
 <script>
-// Get encrypted URL template with placeholders
 let action_url = @json($urlData['url'])
     .replace(@json($urlData['placeholders']['project_id']), projectId)
     .replace(@json($urlData['placeholders']['task_id']), taskId);
 
-// Example AJAX call
 fetch(action_url)
     .then(response => response.json())
     .then(data => console.log(data));
 </script>
 ```
 
+---
 
 ### Methods
 
 - `encryptedRouteJS(string $routeName, array $paramNames)`
 
-  Generates a URL template with encrypted placeholders for JavaScript use.
+```php
+$urlData = encryptedRouteJS('route.name', ['param1', 'param2']);
+// Returns: ['url' => '...', 'placeholders' => [...]]
+```
 
-  ```php
-  $urlData = encryptedRouteJS('route.name', ['param1', 'param2']);
-  // Returns: ['url' => '...', 'placeholders' => [...]]
-  ```
+---
 
+## 🛠 Local Development (Full Source Access)
+
+If a developer needs to modify the package code locally, the package provides an **optional source publish**:
+
+In `UrlEncoderServiceProvider`:
+```php
+$this->publishes([
+    __DIR__ . '/../' => base_path('packages/paramguard/url-encoder'),
+], 'url-encoder-source');
+```
+
+Publish the source:
+```bash
+php artisan vendor:publish --tag=url-encoder-source
+```
+
+This will copy the full package into:
+```
+packages/paramguard/url-encoder
+```
+
+To use the local version, update your `composer.json` with the following repository entry:
+
+```json
+"repositories": [
+    {
+        "type": "path",
+        "url": "../laravel-url-encoder",
+        "options": {
+            "symlink": true
+        }
+    }
+]
+```
+
+Then run:
+
+```bash
+composer require paramguard/url-encoder:@dev
+```
+
+This will symlink your local package so changes take effect immediately without needing to reinstall.
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Make changes and commit:
+   ```bash
+   git commit -m "Description of change"
+   ```
+4. Push to your fork:
+   ```bash
+   git push origin feature/your-feature
+   ```
+5. Submit a Pull Request.
+
+We’ll review your contribution together before merging.
+
+---
+
+## 📄 License
+
+This package is open-source and licensed under the MIT License.

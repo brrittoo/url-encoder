@@ -13,4 +13,18 @@
 		{
 			return is_string($val);
 		}
+		public static function randomBytes($len)
+		{
+			return random_bytes($len);
+		}
+		
+		public static function bin2hex($string)
+		{
+			return bin2hex($string);
+		}
+		
+		public static function strlen($string)
+		{
+			return strlen($string);
+		}
 	}
