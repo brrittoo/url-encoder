@@ -1,8 +1,7 @@
 
 # Laravel URL Encoder
 
-[![Latest Version](https://img.shields.io/packagist/v/paramguard/url-encoder.svg?style=flat-square)]
-(https://packagist.org/packages/paramguard/url-encoder)
+[![Latest Version](https://img.shields.io/packagist/v/paramguard/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
 [![Total Downloads](https://img.shields.io/packagist/dt/paramguard/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
 [![License](https://img.shields.io/packagist/l/paramguard/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
 
