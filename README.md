@@ -183,12 +183,6 @@ composer update paramguard/url-encoder
 
 This will local package so changes take effect immediately without needing to reinstall.
 
----
-
-
----
-
-Also, the **Local Development (From Git Clone)** section needs proper markdown formatting and code blocks:
 
 ```markdown
 ## Local Development (From Git Clone)
