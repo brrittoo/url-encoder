@@ -235,7 +235,7 @@ This symlinks the package source from your cloned repo into your Laravel project
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository.
 2. Create a new branch:
