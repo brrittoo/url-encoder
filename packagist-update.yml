@@ -1,0 +1,19 @@
+name: Update Packagist
+
+on:
+  push:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+jobs:
+  update-packagist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Packagist
+        run: |
+          curl -X POST \
+            -u "${{ secrets.PACKAGIST_USERNAME }}:${{ secrets.PACKAGIST_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"repository":{"url":"https://packagist.org/packages/ataulgalib/laravel-url-encoder"}}' \
+            https://packagist.org/api/update-package
