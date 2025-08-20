@@ -184,9 +184,9 @@ composer update paramguard/url-encoder
 This will local package so changes take effect immediately without needing to reinstall.
 
 
-```markdown
+
 ## Local Development (From Git Clone)
-```
+
 
 If you prefer to clone the package repo directly and develop locally with a symlink:
 
