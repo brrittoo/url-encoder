@@ -143,7 +143,7 @@ $urlData = encryptedRouteJS('route.name', ['param1', 'param2']);
 
 ---
 
-## 🛠 Local Development (Full Source Access)
+## Local Development (Full Source Access)
 
 If a developer needs to modify the package code locally, the package provides an **optional source publish**:
 
@@ -191,7 +191,7 @@ This will local package so changes take effect immediately without needing to re
 Also, the **Local Development (From Git Clone)** section needs proper markdown formatting and code blocks:
 
 ```markdown
-## 🛠 Local Development (From Git Clone)
+## Local Development (From Git Clone)
 ```
 
 If you prefer to clone the package repo directly and develop locally with a symlink:
@@ -256,6 +256,6 @@ We’ll review your contribution together before merging.
 
 ---
 
-## 📄 License
+## License
 
 This package is open-source and licensed under the MIT License.
