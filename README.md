@@ -7,13 +7,13 @@ Secure URL parameter encryption for Laravel applications. Protect sensitive data
 
 ## Features
 
-- 🔒 Automatic encryption/decryption of route parameters
-- 🔄 Seamless integration with Laravel's URL generation
-- 🛡️ AES-128-CTR encryption with random IVs
-- 🌐 URL-safe base64 encoding
-- 🚦 Configurable route groups and exclusions
-- 💻 JavaScript compatibility
-- 🛠 Optional full source publish for local development
+- Automatic encryption/decryption of route parameters
+- Seamless integration with Laravel's URL generation
+- AES-128-CTR encryption with random IVs
+- URL-safe base64 encoding
+- Configurable route groups and exclusions
+- JavaScript compatibility
+- Optional full source publish for local development
 
 ---
 
