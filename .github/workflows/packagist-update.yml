@@ -13,7 +13,7 @@ jobs:
       - name: Update Packagist
         run: |
           curl -X POST \
-            -u "${{ secrets.PACKAGIST_USERNAME }}:${{ secrets.PACKAGIST_API_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"repository":{"url":"https://packagist.org/packages/ataulgalib/laravel-url-encoder"}}' \
-            https://packagist.org/api/update-package
+            -H 'Authorization: Bearer ${{ secrets.PACKAGIST_USERNAME }}:${{ secrets.PACKAGIST_API_TOKEN }}' \
+            -H 'Content-Type: application/json' \
+            -d '{"repository":"https://github.com/ataulgalib/laravel-url-encoder"}' \
+                https://packagist.org/api/update-package
