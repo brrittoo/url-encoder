@@ -1,5 +1,5 @@
 {
-    "name": "ataulgalib/url-encoder",
+    "name": "paramguard/url-encoder",
     "description": "Laravel package for URL parameter encoding",
     "type": "library",
     "license": "MIT",
