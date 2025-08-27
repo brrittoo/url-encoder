@@ -36,16 +36,16 @@
 			}
 			
 			// Single parameter (string or number)
-			if (ParamGuard\UrlEncoder\Utilities\Str::isString($parameters) || ParamGuard\UrlEncoder\Utilities\Number::isNumeric
+			if (Brritto\UrlEncoder\Utilities\Str::isString($parameters) || Brritto\UrlEncoder\Utilities\Number::isNumeric
 				($parameters)) {
-				$encrypted = \ParamGuard\UrlEncoder\Utilities\Url::getRouteParamEncryptionDecryption($parameters, ENCRYPTED_PARAM);
+				$encrypted = \Brritto\UrlEncoder\Utilities\Url::getRouteParamEncryptionDecryption($parameters, ENCRYPTED_PARAM);
 				return route($name, $encrypted, $absolute);
 			}
 			
 			// Array of parameters
 			$encryptedParams = [];
 			foreach ((array) $parameters as $key => $value) {
-				$encryptedParams[$key] = \ParamGuard\UrlEncoder\Utilities\Url::getRouteParamEncryptionDecryption($value, ENCRYPTED_PARAM);
+				$encryptedParams[$key] = \Brritto\UrlEncoder\Utilities\Url::getRouteParamEncryptionDecryption($value, ENCRYPTED_PARAM);
 			}
 			
 			return route($name, $encryptedParams, $absolute);
@@ -81,7 +81,7 @@
 				
 				// Encrypt the placeholder if encoding is enabled
 				$encoded = enableUrlEncode()
-					? \ParamGuard\UrlEncoder\Utilities\Url::getRouteParamEncryptionDecryption($placeholder, ENCRYPTED_PARAM)
+					? \Brritto\UrlEncoder\Utilities\Url::getRouteParamEncryptionDecryption($placeholder, ENCRYPTED_PARAM)
 					: $placeholder;
 				
 				$placeholders[$key] = $encoded;

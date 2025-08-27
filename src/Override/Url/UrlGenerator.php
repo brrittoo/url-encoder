@@ -1,13 +1,13 @@
 <?php
 
-    namespace ParamGuard\UrlEncoder\Override\Url;
+    namespace Brritto\UrlEncoder\Override\Url;
 
     use Illuminate\Routing\RouteCollectionInterface;
     use Illuminate\Http\Request;
     use Illuminate\Routing\UrlGenerator as BaseUrlGenerator;
-    use ParamGuard\UrlEncoder\Utilities\Arr;
-    use ParamGuard\UrlEncoder\Utilities\Str;
-    use ParamGuard\UrlEncoder\Utilities\Url;
+    use Brritto\UrlEncoder\Utilities\Arr;
+    use Brritto\UrlEncoder\Utilities\Str;
+    use Brritto\UrlEncoder\Utilities\Url;
     use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 

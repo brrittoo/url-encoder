@@ -1,6 +1,6 @@
 <?php
 
-	namespace ParamGuard\UrlEncoder\Utilities;
+	namespace Brritto\UrlEncoder\Utilities;
     use Illuminate\Support\Arr as CoreArr;
 	class Arr extends CoreArr
 	{

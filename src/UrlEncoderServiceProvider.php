@@ -1,12 +1,12 @@
 <?php
 	
-	namespace ParamGuard\UrlEncoder;
+	namespace Brritto\UrlEncoder;
 	
 	use Illuminate\Support\ServiceProvider;
-	use ParamGuard\UrlEncoder\Override\Url\UrlGenerator;
-	use ParamGuard\UrlEncoder\Middleware\UrlManipulationMiddleware;
-	use ParamGuard\UrlEncoder\Utilities\Arr;
-	use ParamGuard\UrlEncoder\Utilities\Str;
+	use Brritto\UrlEncoder\Override\Url\UrlGenerator;
+	use Brritto\UrlEncoder\Middleware\UrlManipulationMiddleware;
+	use Brritto\UrlEncoder\Utilities\Arr;
+	use Brritto\UrlEncoder\Utilities\Str;
 	use RuntimeException;
 	use Illuminate\Routing\Router;
 	
@@ -31,7 +31,6 @@
 		public function boot()
 		{
 			$this->validateEncryptionKey();
-			$this->registerMiddleware();
 			$this->publishConfig();
 			$this->publishFullPakages();
 		}
@@ -67,28 +66,6 @@
 			}
 		}
 		
-		protected function registerMiddleware()
-		{
-			$router = $this->app->make(Router::class);
-			$middlewareAlias = config('url-encoder.middleware_alias', 'url-encode');
-			$enabledGroups = config('url-encoder.enable_route_groups', []);
-			
-			$router->aliasMiddleware($middlewareAlias, UrlManipulationMiddleware::class);
-			
-			$reflection = new \ReflectionObject($router);
-			$property = $reflection->getProperty('middlewareGroups');
-			$property->setAccessible(true);
-			$middlewareGroups = $property->getValue($router);
-			
-			foreach ($enabledGroups as $groupName) {
-				if (isset($middlewareGroups[$groupName]) &&
-					!Arr::inArray($middlewareAlias, $middlewareGroups[$groupName])) {
-					$middlewareGroups[$groupName][] = $middlewareAlias;
-				}
-			}
-			
-			$property->setValue($router, $middlewareGroups);
-		}
 		
 		protected function publishConfig()
 		{
@@ -101,7 +78,7 @@
 		{
 			// Publish full package source for customization
 			$this->publishes([
-				__DIR__ . '/../' => base_path('packages/paramguard/url-encoder'),
+				__DIR__ . '/../' => base_path('packages/brritto/url-encoder'),
 			], 'url-encoder-source');
 		}
 	}

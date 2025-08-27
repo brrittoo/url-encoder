@@ -1,5 +1,5 @@
 {
-    "name": "paramguard/url-encoder",
+    "name": "brritto/url-encoder",
     "description": "Laravel package for URL parameter encoding",
     "type": "library",
     "license": "MIT",
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ParamGuard\\UrlEncoder\\": "src/"
+            "Brritto\\UrlEncoder\\": "src/"
         },
         "files": [
             "src/Helpers/helpers.php"
@@ -24,16 +24,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ParamGuard\\UrlEncoder\\Tests\\": "tests/"
+            "Brritto\\UrlEncoder\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ParamGuard\\UrlEncoder\\UrlEncoderServiceProvider"
+                "Brritto\\UrlEncoder\\UrlEncoderServiceProvider"
             ],
             "aliases": {
-                "UrlEncoder": "ParamGuard\\UrlEncoder\\Facades\\UrlEncoder"
+                "UrlEncoder": "Brritto\\UrlEncoder\\Facades\\UrlEncoder"
             }
         }
     }

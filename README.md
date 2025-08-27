@@ -1,7 +1,7 @@
 # Laravel URL Encoder
-[![Latest Version](https://img.shields.io/packagist/v/paramguard/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
-[![Total Downloads](https://img.shields.io/packagist/dt/paramguard/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
-[![License](https://img.shields.io/packagist/l/paramguard/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
+[![Latest Version](https://img.shields.io/packagist/v/brritto/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
+[![Total Downloads](https://img.shields.io/packagist/dt/brritto/url-encoder.svg?style=flat-square)](https://packagist.org/packages/brritto/url-encoder)
+[![License](https://img.shields.io/packagist/l/brritto/url-encoder.svg?style=flat-square)](https://packagist.org/packages/brritto/url-encoder)
 
 Secure URL parameter encryption for Laravel applications. Protect sensitive data in your routes with AES-128-CTR encryption.
 
@@ -22,13 +22,13 @@ Secure URL parameter encryption for Laravel applications. Protect sensitive data
 Install via Composer:
 
 ```bash
-composer require paramguard/url-encoder
+composer require brritto/url-encoder
 ```
 
 Publish the config file:
 
 ```bash
-php artisan vendor:publish --provider="ParamGuard\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
+php artisan vendor:publish --provider="Brritto\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
 ```
 
 ---
@@ -41,6 +41,25 @@ Set these in your `.env`:
 URL_ENCODE_ENABLE=true
 URL_ENCRYPTION_SECRET_KEY=your-32-character-secret-key-here
 ```
+Add the middleware alias to your `app/Http/Kernel.php`:
+
+```php
+protected $routeMiddleware = [
+    // Other middleware...
+    'url-encode' => \Brritto\UrlEncoder\Middleware\UrlManipulationMiddleware::class,
+];
+```
+you can also use like this way
+
+```php
+protected $middlewareGroups = [
+    'web' => [
+        // existing middleware...
+        \Brritto\UrlEncoder\Middleware\UrlManipulationMiddleware::class,
+    ],
+];
+```
+
 
 Edit `config/url-encoder.php` to customize:
 
@@ -48,33 +67,6 @@ Edit `config/url-encoder.php` to customize:
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Middleware Alias
-    |--------------------------------------------------------------------------
-    */
-    'middleware_alias' => 'url-encode',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Enabled Route Groups
-    |--------------------------------------------------------------------------
-    */
-    'enable_route_groups' => [
-        'web'
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Excluded Routes
-    |--------------------------------------------------------------------------
-    */
-    'exclude_routes' => [
-        'login',
-        'register'
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Enable Encoding
@@ -150,7 +142,7 @@ If a developer needs to modify the package code locally, the package provides an
 In `UrlEncoderServiceProvider`:
 ```php
 $this->publishes([
-    __DIR__ . '/../' => base_path('packages/paramguard/url-encoder'),
+    __DIR__ . '/../' => base_path('packages/brritto/url-encoder'),
 ], 'url-encoder-source');
 ```
 
@@ -161,7 +153,7 @@ php artisan vendor:publish --tag=url-encoder-source
 
 This will copy the full package into:
 ```
-packages/paramguard/url-encoder
+packages/brritto/url-encoder
 ```
 
 To use the local version, update your `composer.json` with the following repository entry:
@@ -170,7 +162,7 @@ To use the local version, update your `composer.json` with the following reposit
 "repositories": [
     {
         "type": "path",
-        "url": "packages/paramguard/url-encoder"
+        "url": "packages/brritto/url-encoder"
     }
 ]
 ```
@@ -178,7 +170,7 @@ To use the local version, update your `composer.json` with the following reposit
 Then run:
 
 ```bash
-composer update paramguard/url-encoder
+composer update brritto/url-encoder
 ```
 
 This will local package so changes take effect immediately without needing to reinstall.
@@ -200,7 +192,7 @@ git clone https://github.com/ataulgalib/laravel-url-encoder.git ../laravel-url-e
 Add this repository to your Laravel project’s composer.json:
 
 ```json
-      "repositories": [
+      "repositories":[
          {
             "type": "path",
             "url": "../laravel-url-encoder",
@@ -215,14 +207,14 @@ Add this repository to your Laravel project’s composer.json:
 Require the package locally using the dev version:
 
 ```bash
-composer require paramguard/url-encoder:@dev
+composer require brritto/url-encoder:@dev
 ```
 
 
 Publish the package config:
 
 ```bash
-php artisan vendor:publish --provider="ParamGuard\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
+php artisan vendor:publish --provider="Brritto\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
 ```
 
 This symlinks the package source from your cloned repo into your Laravel project, so any changes in the clone take effect immediately.

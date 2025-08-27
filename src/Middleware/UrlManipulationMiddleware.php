@@ -1,12 +1,12 @@
 <?php
 
-    namespace ParamGuard\UrlEncoder\Middleware;
+    namespace Brritto\UrlEncoder\Middleware;
 
     use Illuminate\Http\Request;
 
     use Closure;
-    use ParamGuard\UrlEncoder\Utilities\Arr;
-    use ParamGuard\UrlEncoder\Utilities\Url;
+    use Brritto\UrlEncoder\Utilities\Arr;
+    use Brritto\UrlEncoder\Utilities\Url;
     use Symfony\Component\HttpFoundation\Response;
     class UrlManipulationMiddleware
     {
@@ -19,7 +19,6 @@
         public function handle(Request $request, Closure $next) : Response
         {
             if (enableUrlEncode()) {
-				
                 if (!$request->route()) {
                     return $next($request);
                 }

@@ -1,5 +1,5 @@
 <?php
-	namespace ParamGuard\UrlEncoder\Utilities;
+	namespace Brritto\UrlEncoder\Utilities;
 	
 	class EncodeClipper {
 		public static function customEncryptionDecryption($value, $action, $isURL = false) {
@@ -40,7 +40,7 @@
 			'&' => '__I__',
 			'=' => '__B__',
 			'%' => '__T__',
-			'+' => '__AA__',
+			'+' => '__X__',
 			'-' => '__N__',
 			'_' => '__U__',
 		];
