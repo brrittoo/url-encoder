@@ -67,6 +67,18 @@ Edit `config/url-encoder.php` to customize:
 <?php
 
 return [
+     /*
+     |--------------------------------------------------------------------------
+     | Excluded Routes
+     |--------------------------------------------------------------------------
+     |
+     | Route names that should skip URL encoding
+     |
+     */
+     'exclude_routes' => [
+         'login',
+         'register'
+     ],
     /*
     |--------------------------------------------------------------------------
     | Enable Encoding
