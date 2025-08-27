@@ -1,7 +1,7 @@
 # Laravel URL Encoder
-[![Latest Version](https://img.shields.io/packagist/v/brritto/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
-[![Total Downloads](https://img.shields.io/packagist/dt/brritto/url-encoder.svg?style=flat-square)](https://packagist.org/packages/brritto/url-encoder)
-[![License](https://img.shields.io/packagist/l/brritto/url-encoder.svg?style=flat-square)](https://packagist.org/packages/brritto/url-encoder)
+[![Latest Version](https://img.shields.io/packagist/v/brrittoo/url-encoder.svg?style=flat-square)](https://packagist.org/packages/paramguard/url-encoder)
+[![Total Downloads](https://img.shields.io/packagist/dt/brrittoo/url-encoder.svg?style=flat-square)](https://packagist.org/packages/brrittoo/url-encoder)
+[![License](https://img.shields.io/packagist/l/brrittoo/url-encoder.svg?style=flat-square)](https://packagist.org/packages/brrittoo/url-encoder)
 
 Secure URL parameter encryption for Laravel applications. Protect sensitive data in your routes with AES-128-CTR encryption.
 
