@@ -1,6 +1,6 @@
 <?php
 	
-	namespace Brritto\UrlEncoder\Utilities;
+	namespace Brrittoo\UrlEncoder\Utilities;
 	
 	use Illuminate\Support\Number as CoreNumber;
 	class Number extends CoreNumber

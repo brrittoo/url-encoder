@@ -1,5 +1,5 @@
 <?php
-	namespace Brritto\UrlEncoder\Utilities;
+	namespace Brrittoo\UrlEncoder\Utilities;
 	
 	class EncodeClipper {
 		public static function customEncryptionDecryption($value, $action, $isURL = false) {

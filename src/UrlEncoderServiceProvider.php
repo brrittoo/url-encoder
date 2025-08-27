@@ -1,12 +1,12 @@
 <?php
 	
-	namespace Brritto\UrlEncoder;
+	namespace Brrittoo\UrlEncoder;
 	
 	use Illuminate\Support\ServiceProvider;
-	use Brritto\UrlEncoder\Override\Url\UrlGenerator;
-	use Brritto\UrlEncoder\Middleware\UrlManipulationMiddleware;
-	use Brritto\UrlEncoder\Utilities\Arr;
-	use Brritto\UrlEncoder\Utilities\Str;
+	use Brrittoo\UrlEncoder\Override\Url\UrlGenerator;
+	use Brrittoo\UrlEncoder\Middleware\UrlManipulationMiddleware;
+	use Brrittoo\UrlEncoder\Utilities\Arr;
+	use Brrittoo\UrlEncoder\Utilities\Str;
 	use RuntimeException;
 	use Illuminate\Routing\Router;
 	
@@ -78,7 +78,7 @@
 		{
 			// Publish full package source for customization
 			$this->publishes([
-				__DIR__ . '/../' => base_path('packages/brritto/url-encoder'),
+				__DIR__ . '/../' => base_path('packages/brrittoo/url-encoder'),
 			], 'url-encoder-source');
 		}
 	}

@@ -22,13 +22,13 @@ Secure URL parameter encryption for Laravel applications. Protect sensitive data
 Install via Composer:
 
 ```bash
-composer require brritto/url-encoder
+composer require brrittoo/url-encoder
 ```
 
 Publish the config file:
 
 ```bash
-php artisan vendor:publish --provider="Brritto\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
+php artisan vendor:publish --provider="Brrittoo\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
 ```
 
 ---
@@ -46,7 +46,7 @@ Add the middleware alias to your `app/Http/Kernel.php`:
 ```php
 protected $routeMiddleware = [
     // Other middleware...
-    'url-encode' => \Brritto\UrlEncoder\Middleware\UrlManipulationMiddleware::class,
+    'url-encode' => \Brrittoo\UrlEncoder\Middleware\UrlManipulationMiddleware::class,
 ];
 ```
 you can also use like this way
@@ -55,7 +55,7 @@ you can also use like this way
 protected $middlewareGroups = [
     'web' => [
         // existing middleware...
-        \Brritto\UrlEncoder\Middleware\UrlManipulationMiddleware::class,
+        \Brrittoo\UrlEncoder\Middleware\UrlManipulationMiddleware::class,
     ],
 ];
 ```
@@ -154,7 +154,7 @@ If a developer needs to modify the package code locally, the package provides an
 In `UrlEncoderServiceProvider`:
 ```php
 $this->publishes([
-    __DIR__ . '/../' => base_path('packages/brritto/url-encoder'),
+    __DIR__ . '/../' => base_path('packages/brrittoo/url-encoder'),
 ], 'url-encoder-source');
 ```
 
@@ -165,7 +165,7 @@ php artisan vendor:publish --tag=url-encoder-source
 
 This will copy the full package into:
 ```
-packages/brritto/url-encoder
+packages/brrittoo/url-encoder
 ```
 
 To use the local version, update your `composer.json` with the following repository entry:
@@ -174,7 +174,7 @@ To use the local version, update your `composer.json` with the following reposit
 "repositories": [
     {
         "type": "path",
-        "url": "packages/brritto/url-encoder"
+        "url": "packages/brrittoo/url-encoder"
     }
 ]
 ```
@@ -182,7 +182,7 @@ To use the local version, update your `composer.json` with the following reposit
 Then run:
 
 ```bash
-composer update brritto/url-encoder
+composer update brrittoo/url-encoder
 ```
 
 This will local package so changes take effect immediately without needing to reinstall.
@@ -219,14 +219,14 @@ Add this repository to your Laravel project’s composer.json:
 Require the package locally using the dev version:
 
 ```bash
-composer require brritto/url-encoder:@dev
+composer require brrittoo/url-encoder:@dev
 ```
 
 
 Publish the package config:
 
 ```bash
-php artisan vendor:publish --provider="Brritto\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
+php artisan vendor:publish --provider="Brrittoo\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
 ```
 
 This symlinks the package source from your cloned repo into your Laravel project, so any changes in the clone take effect immediately.

@@ -1,6 +1,6 @@
 <?php
 
-    namespace Brritto\UrlEncoder\Utilities;
+    namespace Brrittoo\UrlEncoder\Utilities;
 
 	use PHPUnit\Util\Exception;
 	

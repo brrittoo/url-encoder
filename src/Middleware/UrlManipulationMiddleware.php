@@ -1,12 +1,12 @@
 <?php
 
-    namespace Brritto\UrlEncoder\Middleware;
+    namespace Brrittoo\UrlEncoder\Middleware;
 
     use Illuminate\Http\Request;
 
     use Closure;
-    use Brritto\UrlEncoder\Utilities\Arr;
-    use Brritto\UrlEncoder\Utilities\Url;
+    use Brrittoo\UrlEncoder\Utilities\Arr;
+    use Brrittoo\UrlEncoder\Utilities\Url;
     use Symfony\Component\HttpFoundation\Response;
     class UrlManipulationMiddleware
     {
