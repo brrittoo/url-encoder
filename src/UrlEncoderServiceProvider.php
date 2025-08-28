@@ -82,6 +82,8 @@
 			$this->publishConfig();
 			$this->publishFullPakages();
 			
+			
+			
 			$this->app->booted(function () {
 				$this->autoRegisterMiddleware();
 			});
