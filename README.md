@@ -189,3 +189,10 @@ $urlData = encryptedRouteJS('route.name', ['param1', 'param2']);
 ## License
 
 This package is open-source and licensed under the MIT License.
+
+
+## Author
+
+**Ataul Galib**  
+Email: ataul.gonigalib@gmail.com
+
