@@ -19,7 +19,6 @@
 				'url-encoder'
 			);
 			
-			// Defer URL generator extension until we know the current route
 			$this->app->extend('url', function ($original, $app) {
 				if ($this->shouldEnableUrlEncoding($app)) {
 					return new UrlGenerator(
@@ -83,7 +82,6 @@
 			$this->publishConfig();
 			$this->publishFullPakages();
 			
-			// Automatically register middleware for enabled route groups
 			$this->app->booted(function () {
 				$this->autoRegisterMiddleware();
 			});
