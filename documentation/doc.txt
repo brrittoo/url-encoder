@@ -1,0 +1,78 @@
+Laravel URL Encoder – Local Development & Contribution Guide
+
+This guide explains how to set up the package for local development, either by publishing the source into your Laravel project or by cloning the repository directly. It also includes instructions for contributing to the package.
+
+🌱 Local Development (Full Source Publish)
+If you want to modify the package code inside your Laravel project:
+In UrlEncoderServiceProvider:
+$this->publishes([
+    __DIR__ . '/../' => base_path('packages/brrittoo/url-encoder'),
+], 'url-encoder-source');
+
+
+Publish the source to your project:
+php artisan vendor:publish --tag=url-encoder-source
+
+
+This will copy the full package into:
+packages/brrittoo/url-encoder
+
+Update your composer.json to use the local version:
+"repositories": [
+    {
+        "type": "path",
+        "url": "packages/brrittoo/url-encoder"
+    }
+]
+
+
+Install/update the package locally:
+composer update brrittoo/url-encoder
+
+✅ Changes in the local copy will now take effect immediately without needing a full reinstall.
+
+🌱 Local Development (From Git Clone)
+If you prefer cloning the package repo directly and working with a symlink:
+Clone the repository outside your Laravel project folder:
+git clone https://github.com/brrittoo/laravel-url-encoder.git ../laravel-url-encoder
+
+Add the cloned repo as a path repository in your Laravel project’s composer.json:
+"repositories": [
+    {
+        "type": "path",
+        "url": "../laravel-url-encoder",
+        "options": {
+            "symlink": true
+        }
+    }
+]
+
+
+Require the package locally using the dev version:
+composer require brrittoo/url-encoder:@dev
+
+
+Publish the package configuration:
+php artisan vendor:publish --provider="Brrittoo\UrlEncoder\UrlEncoderServiceProvider" --tag="url-encoder-config"
+
+
+✅ This symlinks the cloned package into your project, so any changes made in the clone will immediately reflect in your Laravel application.
+
+🤝 Contributing
+We welcome contributions! To contribute:
+Fork the repository on GitHub.
+Create a new branch:
+git checkout -b feature/your-feature
+Make changes and commit:
+git commit -m "Description of change"
+Push your branch to your fork:
+git push origin feature/your-feature
+
+
+Submit a Pull Request on the main repository.
+We’ll review your contribution and provide feedback before merging.
+
+📌 Notes
+Always test your changes against a local Laravel installation using the package.
+For faster feedback, use artisan commands like vendor:publish, config:clear, and route:clear.
+Keep your branch in sync with the main repository to avoid conflicts.
