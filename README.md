@@ -111,8 +111,9 @@ return [
 
 ## Manual Control the middleware
 If you want full control, change in config/url-encoder.php:
-
-'manual_middleware_registration' => 'none'
+````
+'manual_middleware_registration' => 'none',
+````
 
 Add the middleware alias to your `app/Http/Kernel.php`:
 
