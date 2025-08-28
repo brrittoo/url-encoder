@@ -23,7 +23,9 @@
                     return $next($request);
                 }
                 $parameters = $request->route()->parameters();
-                if (!empty($parameters) && Arr::accessible($parameters)) {
+	            $exclude_routes = config('url-encoder.exclude_routes', []);
+	            $routeName = $request->route()->getName();
+                if (!empty($parameters) && Arr::accessible($parameters) && !Arr::inArray($routeName, $exclude_routes)) {
                     $decrypted_parameters = Url::getRouteParamEncryptionDecryption($parameters, DECRYPTED_PARAM);
 
                     foreach ($decrypted_parameters as $key => $value) {

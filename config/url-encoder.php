@@ -3,6 +3,19 @@
 	return [
 		/*
 		|--------------------------------------------------------------------------
+		| Enabled Route Groups
+		|--------------------------------------------------------------------------
+		|
+		| Route groups where URL encoding should be automatically applied
+		|
+		*/
+		'enable_route_groups' => [
+			'web',
+			'api',
+		],
+		
+		/*
+		|--------------------------------------------------------------------------
 		| Excluded Routes
 		|--------------------------------------------------------------------------
 		|
@@ -13,6 +26,17 @@
 			'login',
 			'register'
 		],
+		
+		/*
+		|--------------------------------------------------------------------------
+		| Manual Middleware Registration
+		|--------------------------------------------------------------------------
+		|
+		| Manually specify where to apply the middleware if not using route groups
+		| Options: 'global', 'none', or array of specific middleware groups
+		|
+		*/
+		'manual_middleware_registration' => 'auto',
 		
 		/*
 		|--------------------------------------------------------------------------
