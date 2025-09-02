@@ -76,3 +76,6 @@ We’ll review your contribution and provide feedback before merging.
 Always test your changes against a local Laravel installation using the package.
 For faster feedback, use artisan commands like vendor:publish, config:clear, and route:clear.
 Keep your branch in sync with the main repository to avoid conflicts.
+
+
+
