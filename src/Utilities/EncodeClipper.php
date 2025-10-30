@@ -3,18 +3,23 @@
 	
 	class EncodeClipper {
 		public static function customEncryptionDecryption($value, $action, $isURL = false) {
-			$secret_key = config('url-encoder.url_encryption_secret_key');
-			if ($action == ENCRYPTED_PARAM) {
-				$value = is_array($value) ? implode('|', $value) : $value;
-				$encrypted = self::encrypt_ctr($value, $secret_key);
-				return $isURL ? self::base64UrlEncode($encrypted) : $encrypted;
-			}
+			try{
+				$secret_key = config('url-encoder.url_encryption_secret_key');
+				
+				if ($action == ENCRYPTED_PARAM) {
+					$value = is_array($value) ? implode('|', $value) : $value;
+					$encrypted = self::encrypt_ctr($value, $secret_key);
+					return $isURL ? self::base64UrlEncode($encrypted) : $encrypted;
+				}
+				
+				if ($action == DECRYPTED_PARAM) {
+					$value = $isURL ? self::base64UrlDecode($value) : $value;
+					return self::decrypt_ctr($value, $secret_key);
+				}
+				
+			}catch (\Throwable $e){
 			
-			if ($action == DECRYPTED_PARAM) {
-				$value = $isURL ? self::base64UrlDecode($value) : $value;
-				return self::decrypt_ctr($value, $secret_key);
 			}
-			
 			return $value;
 		}
 		
