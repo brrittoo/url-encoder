@@ -1,40 +1,51 @@
 {
-    "name": "brrittoo/url-encoder",
-    "description": "Laravel package for URL parameter encoding",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "ataul-galib",
-            "email": "ataul.gonigalib@gmail.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {
-        "php": ">=8.0",
-        "illuminate/support": "^8.0|^9.0|^10.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Brrittoo\\UrlEncoder\\": "src/"
-        },
-        "files": [
-            "src/Helpers/helpers.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Brrittoo\\UrlEncoder\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Brrittoo\\UrlEncoder\\UrlEncoderServiceProvider"
-            ],
-            "aliases": {
-                "UrlEncoder": "Brrittoo\\UrlEncoder\\Facades\\UrlEncoder"
-            }
-        }
+  "name": "brrittoo/url-encoder",
+  "description": "Laravel package for URL parameter encoding",
+  "type": "library",
+  "license": "MIT",
+
+  "authors": [
+    {
+      "name": "ataul-galib",
+      "email": "ataul.gonigalib@gmail.com"
     }
+  ],
+
+  "require": {
+    "php": "^8.3|^8.4|^8.5",
+    "illuminate/support": "^11.0|^12.0"
+  },
+
+  "require-dev": {
+    "orchestra/testbench": "^9.0|^10.0"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "Brrittoo\\UrlEncoder\\": "src/"
+    },
+    "files": [
+      "src/Helpers/helpers.php"
+    ]
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "Brrittoo\\UrlEncoder\\Tests\\": "tests/"
+    }
+  },
+
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Brrittoo\\UrlEncoder\\UrlEncoderServiceProvider"
+      ],
+      "aliases": {
+        "UrlEncoder": "Brrittoo\\UrlEncoder\\Facades\\UrlEncoder"
+      }
+    }
+  },
+
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
